@@ -1,3 +1,5 @@
+document.getElementById('submit-answer').addEventListener('click', checkAnswer);
+
 function checkAnswer() {
   
     var correctAnswer = "4";
@@ -11,4 +13,4 @@ function checkAnswer() {
     }
 }
 
-document.getElementById('submit-answer').addEventListener('click', checkAnswer);
+
