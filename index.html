@@ -2,23 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Simple Quiz</title>
+    <title>Davies Welcome Quiz</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    <div id="quiz-container">
-        <p id="quiz-question">What is 2 + 2?</p>
-        <div>
-            <input type="radio" id="choice1" name="quiz" value="4">
-            <label for="choice1">4</label><br>
-            <input type="radio" id="choice2" name="quiz" value="22">
-            <label for="choice2">22</label><br>
-            <input type="radio" id="choice3" name="quiz" value="3">
-            <label for="choice3">3</label>
+
+    <!-- Welcome Screen -->
+    <div id="welcome-container">
+        <img class="logo" src="imgs/logo.png">
+        <h1>Welcome to Davies' Quiz</h1>
+        <button id="start-quiz">Start Quiz</button>
+    </div>
+
+    <!-- Quiz Container -->
+    <div id="quiz-container" style="display: none;">
+        
+        <p id="quiz-question"></p>
+        <div id="quiz-options"></div>
+        <div id="navigation-buttons">
+            <button id="prev-question" style="display: none;">Previous</button>
+            <button id="next-question">Next</button>
+            <button id="submit-answer" style="display: none;">Submit Answers</button>
         </div>
-        <button id="submit-answer">Submit Answer</button>
+        <div id="progress-indicator"></div>
         <p id="feedback"></p>
     </div>
+
     <script src="quiz.js"></script>
 </body>
 </html>
