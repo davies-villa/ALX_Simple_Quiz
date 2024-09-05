@@ -8,9 +8,11 @@ body {
     text-align: center;
     margin-top: 100px;
 }
-.logo{
+
+.logo {
     height: 100px;
 }
+
 #start-quiz {
     padding: 10px 20px;
     font-size: 18px;
@@ -31,7 +33,7 @@ body {
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 #progress-indicator {
@@ -91,7 +93,9 @@ label {
 
 #prev-question:hover,
 #next-question:hover,
-#submit-answer:hover {
+#submit-answer:hover,
+#try-again:hover,
+#finish-quiz:hover {
     background-color: #2364aa;
 }
 
@@ -99,4 +103,14 @@ label {
     margin-top: 20px;
     font-size: 18px;
     text-align: center;
+}
+
+.correct-answer {
+    color: green;
+    font-weight: bold;
+}
+
+.wrong-answer {
+    color: red;
+    font-weight: bold;
 }

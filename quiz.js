@@ -28,6 +28,7 @@ const quizData = [
 
 let currentQuestionIndex = 0;
 let score = 0;
+let answers = [];
 
 document.getElementById('start-quiz').addEventListener('click', startQuiz);
 document.getElementById('prev-question').addEventListener('click', prevQuestion);
@@ -80,33 +81,56 @@ function prevQuestion() {
 }
 
 function nextQuestion() {
+    saveAnswer();
     currentQuestionIndex++;
     updateProgress();
     showQuestion();
 }
 
-function showResult() {
+function saveAnswer() {
     const userAnswer = document.querySelector('input[name="quiz"]:checked');
-    
-    if (userAnswer && userAnswer.value === quizData[currentQuestionIndex].correctAnswer) {
-        score++;
+    if (userAnswer) {
+        answers[currentQuestionIndex] = userAnswer.value;
     }
+}
 
-    document.getElementById('quiz-container').innerHTML = `
-        <h2>Quiz Completed!</h2>
-        <p>Your score: ${score}/${quizData.length}</p>
-        ${score >= 4 ? '<p>Congratulations! You did great!</p>' : score === 3 ? '<p>Fair attempt! You got 3 out of 5 correct.</p>' : '<p>Try again! You can do better next time.</p>'}
-        <button id="try-again">Try Again</button>
-        <button id="finish-quiz">Finish</button>
-    `;
+function showResult() {
+    saveAnswer();
 
-    document.getElementById('try-again').addEventListener('click', tryAgain);
-    document.getElementById('finish-quiz').addEventListener('click', finishQuiz);
+    const resultContainer = document.createElement('div');
+    resultContainer.innerHTML = `<h2>Quiz Completed!</h2><p>Your score: ${score}/${quizData.length}</p>`;
+
+    quizData.forEach((question, index) => {
+        const answer = document.createElement('p');
+        if (answers[index] === question.correctAnswer) {
+            answer.innerHTML = `<span class="correct-answer">✔</span> Question: ${question.question} - Your Answer: ${answers[index]} (Correct)`;
+            score++;
+        } else {
+            answer.innerHTML = `<span class="wrong-answer">✘</span> Question: ${question.question} - Your Answer: ${answers[index] || "None"} (Correct Answer: ${question.correctAnswer})`;
+        }
+        resultContainer.appendChild(answer);
+    });
+
+    document.getElementById('quiz-container').innerHTML = '';
+    document.getElementById('quiz-container').appendChild(resultContainer);
+
+    const tryAgainButton = document.createElement('button');
+    tryAgainButton.id = 'try-again';
+    tryAgainButton.textContent = 'Try Again';
+    tryAgainButton.addEventListener('click', tryAgain);
+    resultContainer.appendChild(tryAgainButton);
+
+    const finishButton = document.createElement('button');
+    finishButton.id = 'finish-quiz';
+    finishButton.textContent = 'Finish';
+    finishButton.addEventListener('click', finishQuiz);
+    resultContainer.appendChild(finishButton);
 }
 
 function tryAgain() {
     currentQuestionIndex = 0;
     score = 0;
+    answers = [];
     startQuiz();
 }
 
